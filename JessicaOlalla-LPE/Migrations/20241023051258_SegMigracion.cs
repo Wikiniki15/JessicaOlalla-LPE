@@ -5,7 +5,7 @@
 namespace JessicaOlalla_LPE.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeraMigracion : Migration
+    public partial class SegMigracion : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,21 @@ namespace JessicaOlalla_LPE.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Equipo", x => x.IdEquipo);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Estadio",
+                columns: table => new
+                {
+                    IdEstadio = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Direccion = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CiuEstadio = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Capacidad = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estadio", x => x.IdEstadio);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,6 +72,9 @@ namespace JessicaOlalla_LPE.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Estadio");
+
             migrationBuilder.DropTable(
                 name: "Jugador");
 

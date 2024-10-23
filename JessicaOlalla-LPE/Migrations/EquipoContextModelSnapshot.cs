@@ -49,6 +49,32 @@ namespace JessicaOlalla_LPE.Migrations
                     b.ToTable("Equipo");
                 });
 
+            modelBuilder.Entity("JessicaOlalla_LPE.Models.Estadio", b =>
+                {
+                    b.Property<int>("IdEstadio")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEstadio"));
+
+                    b.Property<int>("Capacidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CiuEstadio")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("IdEstadio");
+
+                    b.ToTable("Estadio");
+                });
+
             modelBuilder.Entity("JessicaOlalla_LPE.Models.Jugador", b =>
                 {
                     b.Property<int>("IdJugador")

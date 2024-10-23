@@ -13,4 +13,8 @@ using JessicaOlalla_LPE.Models;
         }
 
         public DbSet<JessicaOlalla_LPE.Models.Equipo> Equipo { get; set; } = default!;
+
+public DbSet<JessicaOlalla_LPE.Models.Jugador> Jugador { get; set; } = default!;
+
+public DbSet<JessicaOlalla_LPE.Models.Estadio> Estadio { get; set; } = default!;
     }
