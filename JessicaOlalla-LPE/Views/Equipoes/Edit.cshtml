@@ -28,6 +28,10 @@
                 <input asp-for="Titulos" class="form-control" />
                 <span asp-validation-for="Titulos" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="EstadioId" class="control-label">Estadio</label>
+                <select asp-for="EstadioId" class="form-control" asp-items="ViewBag.EstadioId"></select>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Acepta_Extranjeros" /> @Html.DisplayNameFor(model => model.Acepta_Extranjeros)

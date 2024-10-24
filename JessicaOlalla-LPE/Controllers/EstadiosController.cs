@@ -85,7 +85,7 @@ namespace JessicaOlalla_LPE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Estadio,Direccion,Ciudad_Estadio,Capacidad")] Estadio estadio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id_Estadio,Nombre_Estadio,Direccion,Ciudad_Estadio,Capacidad")] Estadio estadio)
         {
             if (id != estadio.Id_Estadio)
             {

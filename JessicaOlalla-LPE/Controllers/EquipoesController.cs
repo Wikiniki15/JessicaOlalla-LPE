@@ -34,7 +34,9 @@ namespace JessicaOlalla_LPE.Controllers
             }
 
             var equipo = await _context.Equipo
+                .Include(e => e.estadio)
                 .FirstOrDefaultAsync(m => m.Id_Equipo == id);
+
             if (equipo == null)
             {
                 return NotFound();
@@ -75,11 +77,15 @@ namespace JessicaOlalla_LPE.Controllers
                 return NotFound();
             }
 
-            var equipo = await _context.Equipo.FindAsync(id);
+            var equipo = await _context.Equipo
+                .Include(e => e.estadio)
+                .FirstOrDefaultAsync(m => m.Id_Equipo == id);
+
             if (equipo == null)
             {
                 return NotFound();
             }
+            ViewData["EstadioId"] = new SelectList(_context.Estadio, "Id_Estadio", "Nombre_Estadio");
             return View(equipo);
         }
 
@@ -88,7 +94,7 @@ namespace JessicaOlalla_LPE.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Equipo,Nombre_Equipo,Ciudad_Equipo,Titulos,Acepta_Extranjeros")] Equipo equipo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id_Equipo,Nombre_Equipo,Ciudad_Equipo,Titulos,Acepta_Extranjeros, EstadioId")] Equipo equipo)
         {
             if (id != equipo.Id_Equipo)
             {
@@ -115,6 +121,7 @@ namespace JessicaOlalla_LPE.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["EstadioId"] = new SelectList(_context.Estadio, "Id_Estadio", "Nombre_Estadio");
             return View(equipo);
         }
 
@@ -127,7 +134,9 @@ namespace JessicaOlalla_LPE.Controllers
             }
 
             var equipo = await _context.Equipo
+                .Include(e => e.estadio)
                 .FirstOrDefaultAsync(m => m.Id_Equipo == id);
+
             if (equipo == null)
             {
                 return NotFound();
