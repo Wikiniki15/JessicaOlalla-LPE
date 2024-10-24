@@ -6,10 +6,10 @@ namespace JessicaOlalla_LPE.Models
     public class Jugador
     {
         [Key]
-        public int IdJugador {  get; set; }
+        public int Id_Jugador {  get; set; }
         [Required]
         [StringLength(50)]
-        public string NomJugador { get; set; }
+        public string Nombre_Jugador { get; set; }
         [Required]
         [StringLength(30)]
         public string Posicion {  get; set; }
@@ -18,6 +18,6 @@ namespace JessicaOlalla_LPE.Models
         public int Edad {  get; set; }
         [ForeignKey("EquipoId")]
         public int EquipoId { get; set; }
-        public Equipo equipo { get; set; }
+        public Equipo? equipo { get; set; }
     }
 }

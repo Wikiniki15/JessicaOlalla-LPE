@@ -5,13 +5,16 @@ namespace JessicaOlalla_LPE.Models
     public class Estadio
     {
         [Key]
-        public int IdEstadio { get; set; }
+        public int Id_Estadio { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Nombre_Estadio { get; set; }
         [Required]
         [StringLength(100)]
         public string Direccion { get; set; }
         [Required]
         [StringLength(50)]
-        public string CiuEstadio { get; set; }
+        public string Ciudad_Estadio { get; set; }
         [Required]
         [Range(1, 70000)]
         public int Capacidad { get; set; }

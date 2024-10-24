@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JessicaOlalla_LPE.Migrations
 {
     [DbContext(typeof(EquipoContext))]
-    [Migration("20241023051258_SegMigracion")]
-    partial class SegMigracion
+    [Migration("20241024040446_OctavaMigracion")]
+    partial class OctavaMigracion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,21 +25,24 @@ namespace JessicaOlalla_LPE.Migrations
 
             modelBuilder.Entity("JessicaOlalla_LPE.Models.Equipo", b =>
                 {
-                    b.Property<int>("IdEquipo")
+                    b.Property<int>("Id_Equipo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEquipo"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Equipo"));
 
-                    b.Property<bool>("AcepExtr")
+                    b.Property<bool>("Acepta_Extranjeros")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CiuEquipo")
+                    b.Property<string>("Ciudad_Equipo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("NomEquipo")
+                    b.Property<int>("EstadioId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre_Equipo")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -47,23 +50,25 @@ namespace JessicaOlalla_LPE.Migrations
                     b.Property<int>("Titulos")
                         .HasColumnType("int");
 
-                    b.HasKey("IdEquipo");
+                    b.HasKey("Id_Equipo");
+
+                    b.HasIndex("EstadioId");
 
                     b.ToTable("Equipo");
                 });
 
             modelBuilder.Entity("JessicaOlalla_LPE.Models.Estadio", b =>
                 {
-                    b.Property<int>("IdEstadio")
+                    b.Property<int>("Id_Estadio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEstadio"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Estadio"));
 
                     b.Property<int>("Capacidad")
                         .HasColumnType("int");
 
-                    b.Property<string>("CiuEstadio")
+                    b.Property<string>("Ciudad_Estadio")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -73,18 +78,23 @@ namespace JessicaOlalla_LPE.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("IdEstadio");
+                    b.Property<string>("Nombre_Estadio")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id_Estadio");
 
                     b.ToTable("Estadio");
                 });
 
             modelBuilder.Entity("JessicaOlalla_LPE.Models.Jugador", b =>
                 {
-                    b.Property<int>("IdJugador")
+                    b.Property<int>("Id_Jugador")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdJugador"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Jugador"));
 
                     b.Property<int>("Edad")
                         .HasColumnType("int");
@@ -92,7 +102,7 @@ namespace JessicaOlalla_LPE.Migrations
                     b.Property<int>("EquipoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NomJugador")
+                    b.Property<string>("Nombre_Jugador")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -102,27 +112,33 @@ namespace JessicaOlalla_LPE.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.HasKey("IdJugador");
+                    b.HasKey("Id_Jugador");
 
                     b.HasIndex("EquipoId");
 
                     b.ToTable("Jugador");
                 });
 
+            modelBuilder.Entity("JessicaOlalla_LPE.Models.Equipo", b =>
+                {
+                    b.HasOne("JessicaOlalla_LPE.Models.Estadio", "estadio")
+                        .WithMany()
+                        .HasForeignKey("EstadioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("estadio");
+                });
+
             modelBuilder.Entity("JessicaOlalla_LPE.Models.Jugador", b =>
                 {
                     b.HasOne("JessicaOlalla_LPE.Models.Equipo", "equipo")
-                        .WithMany("jugador")
+                        .WithMany()
                         .HasForeignKey("EquipoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("equipo");
-                });
-
-            modelBuilder.Entity("JessicaOlalla_LPE.Models.Equipo", b =>
-                {
-                    b.Navigation("jugador");
                 });
 #pragma warning restore 612, 618
         }

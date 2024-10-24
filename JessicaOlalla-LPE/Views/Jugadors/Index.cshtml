@@ -1,0 +1,59 @@
+﻿@model IEnumerable<JessicaOlalla_LPE.Models.Jugador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Jugadores</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posicion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                Equipo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Jugador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_Jugador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posicion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.equipo.Nombre_Equipo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Jugador">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Jugador">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Jugador">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
